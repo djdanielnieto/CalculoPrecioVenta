@@ -11,40 +11,51 @@ public class Aplicacion {
         inventario.agregarProducto(productoVino);
             
         inventario.informarPrecios();
+        
         System.out.println("Inicio");
+        System.out.println("El precio de venta es: " +productoGaseosa.getNombre()+" "+productoGaseosa.getPrecio()+" "+productoGaseosa.getStock());
+        System.out.println("El precio de venta es: " +productoVino);
     }
 
 }
 
 
+
+
 public class Producto { 
 
-	private String nombre; 
+	private String Nombre; 
  
 	public String getNombre() { 
-		return nombre; 
+		return Nombre; 
 	} 
 
-	private double precio; 
+	private double Precio; 
 
 	public double getPrecio() { 
-		return precio; 
+		return Precio; 
 	} 
  
-	private int stock; 
+	private int Stock; 
  
 	public int getStock() { 
-		return stock; 
+		return Stock; 
  
 	} 
   
-	public Producto(String nombre, double precio, int stock) {
+public Producto(String nombre, double precio, int stock) {
+	super();
+	this.Nombre = nombre;
+	this.Precio = precio;
+	this.Stock = stock;
 	
 	
 	}
 
  
 } 
+
+
 
 import java.util.List;
 import java.util.ArrayList;
@@ -76,3 +87,5 @@ public List<Producto> getListaDeProductos() {
  
 
 }
+
+
