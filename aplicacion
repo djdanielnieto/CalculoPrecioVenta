@@ -14,7 +14,7 @@ public class Aplicacion {
         
         System.out.println("Inicio");
         System.out.println("El precio de venta es: " +productoGaseosa.getNombre()+" "+productoGaseosa.getPrecio()+" "+productoGaseosa.getStock());
-        System.out.println("El precio de venta es: " +productoVino);
+        System.out.println("El precio de venta es: " +productoVino.getNombre()+" "+productoVino.getPrecio()+" "+productoVino.getStock()+" ");
     }
 
 }
