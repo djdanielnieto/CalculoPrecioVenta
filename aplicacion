@@ -1,0 +1,78 @@
+
+public class Aplicacion {
+
+    public static void main(String[] args) {
+    	           
+        Producto productoGaseosa = new Producto("Gaseosa", 100, 40);
+        Producto productoVino = new Producto("Vino", 2000, 70);
+        
+        Inventario inventario = new Inventario();
+        inventario.agregarProducto(productoGaseosa);
+        inventario.agregarProducto(productoVino);
+            
+        inventario.informarPrecios();
+        System.out.println("Inicio");
+    }
+
+}
+
+
+public class Producto { 
+
+	private String nombre; 
+ 
+	public String getNombre() { 
+		return nombre; 
+	} 
+
+	private double precio; 
+
+	public double getPrecio() { 
+		return precio; 
+	} 
+ 
+	private int stock; 
+ 
+	public int getStock() { 
+		return stock; 
+ 
+	} 
+  
+	public Producto(String nombre, double precio, int stock) {
+	
+	
+	}
+
+ 
+} 
+
+import java.util.List;
+import java.util.ArrayList;
+
+public class Inventario{
+
+private List<Producto> listaDeProductos;
+
+
+public Inventario(){
+    this.listaDeProductos=new ArrayList<>();
+}
+
+public void agregarProducto(Producto p){
+    this.listaDeProductos.add(p);
+}
+ 
+public List<Double>informarPrecios(){
+List<Double>listaDePrecios=new ArrayList<>();
+for(Producto p:this.listaDeProductos){
+       listaDePrecios.add(p.getPrecio());
+}
+return listaDePrecios;
+}
+
+public List<Producto> getListaDeProductos() {
+    return listaDeProductos;
+}
+ 
+
+}
