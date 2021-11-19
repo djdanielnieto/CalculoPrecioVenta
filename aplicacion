@@ -1,91 +1,111 @@
+package api4;
 
 public class Aplicacion {
 
-    public static void main(String[] args) {
-    	           
-        Producto productoGaseosa = new Producto("Gaseosa", 100, 40);
-        Producto productoVino = new Producto("Vino", 2000, 70);
-        
-        Inventario inventario = new Inventario();
-        inventario.agregarProducto(productoGaseosa);
-        inventario.agregarProducto(productoVino);
-            
-        inventario.informarPrecios();
-        
-        System.out.println("Inicio");
-        System.out.println("El precio de venta es: " +productoGaseosa.getNombre()+" "+productoGaseosa.getPrecio()+" "+productoGaseosa.getStock());
-        System.out.println("El precio de venta es: " +productoVino.getNombre()+" "+productoVino.getPrecio()+" "+productoVino.getStock()+" ");
-    }
-
+	public static void main(String[] args) {
+		Producto productoGaseosa = new Producto("Gaseosa",100,40, false);
+		Producto productoVino = new Producto("Vino",2000,70, false);
+		Producto productoAgua = new Producto("Agua", 100, 40, true);
+		Producto productoYerba = new Producto("Yerba", 2000, 70, true);
+		Inventario inventario = new Inventario();
+		inventario.agregarproducto(productoGaseosa);
+		inventario.agregarproducto(productoVino);
+		inventario.agregarproducto(productoAgua);
+		inventario.agregarproducto(productoYerba);
+		inventario.informarPrecios();     
+	
+	}
 }
 
 
+package api4;
+import java.util.ArrayList;
+import java.util.List;
 
+public class Inventario{
 
-public class Producto { 
+private List<Producto> listadeproducto;
 
-	private String Nombre; 
+public Inventario() {
+	
+    this.listadeproducto = new ArrayList();
+}
+
+public void agregarproducto(Producto producto) {
+    this.listadeproducto.add(producto);
+}
  
-	public String getNombre() { 
-		return Nombre; 
-	} 
-
-	private double Precio; 
-
-	public double getPrecio() { 
-		return Precio; 
-	} 
- 
-	private int Stock; 
- 
-	public int getStock() { 
-		return Stock; 
- 
-	} 
-  
-public Producto(String nombre, double precio, int stock) {
-	super();
-	this.Nombre = nombre;
-	this.Precio = precio;
-	this.Stock = stock;
+public void informarPrecios() {
+	
+	int totalcompra = 0;
+	int totalventa = 0;
+	
+	for (Producto p:this.listadeproducto) {
+		totalcompra += p.getPrecio();
+		totalventa = totalventa + p.getVenta();
+		
+	System.out.println("Precio de venta para "+p.getNombre() + ": " + p.getVenta());
+	}
+	System.out.println("Total precios de venta:" +totalcompra);
+	System.out.println("Total precios de venta:" +totalventa);
+	
 	
 	
 	}
-
- 
 } 
 
 
 
-import java.util.List;
-import java.util.ArrayList;
+package api4;
 
-public class Inventario{
+public class Producto {
+	
+	
+	private String nombre;
+	private int precio;
+	private int stock;
+	private int precioventa;
+	private boolean promocional;
+	
+		
+	public Producto (String nombres, int precios, int stocks, boolean promocionals ) {
+		this.nombre = nombres;
+		this.precio = precios;
+		this.stock = stocks;
+		this.precioventa = this.calcularPrecioDeVenta(precios,stocks,promocionals);
+		this.promocional = promocionals;
+		
+		
+	}
+	private int calcularPrecioDeVenta (int precioDeCompra, int cantidad, boolean promo) {
+		
+		double resultado;
+		
+		if(!promo) {
+			if ((cantidad >= 100 && precioDeCompra >1500) || stock < 50) {
+				resultado = (precioDeCompra * 1.15) * 1.21;
+		}else {
+				resultado = (precioDeCompra * 1.20) * 1.21;
+		}
+	}else {
+		resultado = precioDeCompra * 1.21;
+	}
+			
+		return (int) resultado;
+	}
 
-private List<Producto> listaDeProductos;
-
-
-public Inventario(){
-    this.listaDeProductos=new ArrayList<>();
-}
-
-public void agregarProducto(Producto p){
-    this.listaDeProductos.add(p);
-}
- 
-public List<Double>informarPrecios(){
-List<Double>listaDePrecios=new ArrayList<>();
-for(Producto p:this.listaDeProductos){
-       listaDePrecios.add(p.getPrecio());
-}
-return listaDePrecios;
-}
-
-public List<Producto> getListaDeProductos() {
-    return listaDeProductos;
-}
- 
-
+	public String getNombre() {
+		return this.nombre;
+	}
+	public int getPrecio() {
+		return this.precio;
+	}
+	public int getStock() {
+		return this.stock;
+	}
+	public int getVenta() {
+		return this.precioventa;
+	}
 }
 
 
